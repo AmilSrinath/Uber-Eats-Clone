@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text} from "react-native";
 
-export default function Grocery() {
+export default function Browse() {
     return (
-        <Text style={styles.Text}>Grocery</Text>
+        <Text style={styles.Text}>Browse</Text>
     );
 }
 

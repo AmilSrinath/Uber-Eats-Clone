@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text} from "react-native";
 
-export default function Grocery() {
+export default function Account() {
     return (
-        <Text style={styles.Text}>Grocery</Text>
+        <Text style={styles.Text}>Account</Text>
     );
 }
 
