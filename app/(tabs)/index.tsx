@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { AntDesign, MaterialIcons, Feather } from '@expo/vector-icons';
 import Category from "@/components/Home/Category";
 
@@ -16,21 +16,24 @@ export default function HomeScreen() {
             </View>
 
             <View style={styles.searchContainer}>
-                <AntDesign name="search1" size={24} color='#000' />
-                <TextInput
-                    placeholder="Search Uber Eats"
-                    style={styles.searchInput}
-                />
+                <AntDesign name="search1" size={24} color="#000" />
+                <TextInput placeholder="Search Uber Eats" style={styles.searchInput} />
             </View>
 
-            <Category />
+            <Category filterIds={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />
+
+
+
+            <View style={styles.orderAgainContainer}>
+                <Text style={styles.orderAgainText}>Order again</Text>
+            </View>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: 'white',
         padding: 20,
     },
@@ -42,13 +45,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     locationText: {
-        fontSize: 13,
-        letterSpacing: -1,
+        fontSize: 14,
     },
     headerIcons: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 10,
     },
     searchContainer: {
         flexDirection: "row",
@@ -61,5 +62,13 @@ const styles = StyleSheet.create({
     searchInput: {
         fontSize: 16,
         flex: 1,
+        marginLeft: 10,
+    },
+    orderAgainContainer: {
+        marginVertical: 15,
+    },
+    orderAgainText: {
+        fontSize: 23,
+        fontWeight: '500',
     },
 });

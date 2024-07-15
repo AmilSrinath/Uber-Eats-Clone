@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import { collection, getDocs, query } from "firebase/firestore";
-import { db } from "@/config/FirebaseConfig";
+import { DocumentData, collection, getDocs, query} from "firebase/firestore";
+import {db} from "@/config/FirebaseConfig";
 import CategoryItem from "./CategoryItem";
-import { Colors } from "@/constants/Colors";
 
-export default function Category() {
+// @ts-ignore
+export default function Category({filterIds}) {
     const [categoryList, setCategoryList] = useState([]);
 
     useEffect(() => {
@@ -18,9 +18,15 @@ export default function Category() {
 
         const querySnapshot = await getDocs(q);
 
+        const filteredCategories: ((prevState: never[]) => never[]) | DocumentData[] = [];
         querySnapshot.forEach((doc) => {
-            setCategoryList((prev) => [...prev, doc.data()]);
+            const data = doc.data();
+            if (filterIds.includes(data.id)) {
+                filteredCategories.push(data);
+            }
         });
+        // @ts-ignore
+        setCategoryList(filteredCategories);
     };
 
     return (
@@ -34,7 +40,7 @@ export default function Category() {
                     <CategoryItem
                         category={item}
                         key={index}
-                        onCategoryPress={(value) => console.log(value)}
+                        onCategoryPress={(value: any) => console.log(value)}
                     />
                 )}
             />
@@ -45,18 +51,7 @@ export default function Category() {
 const styles = StyleSheet.create({
     categoryContainer: {
         marginTop: 5,
-    },
-    categoryHeader: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingHorizontal: 20,
-        marginBottom: 10,
-    },
-    categoryTitle: {
-        fontSize: 20,
-    },
-    viewAllText: {
-        color: Colors.PRIMARY,
+        right: 15
     },
     categoryList: {
         paddingLeft: 20,
